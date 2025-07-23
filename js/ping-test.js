@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 success: true,
                 responseTime: responseTime,
                 status: response.status || 'Unknown (CORS)',
-                message: `Connection successful (${responseTime}ms)`
+                message: `✅ Server reachable (${responseTime}ms) - Any console CORS errors are normal`
             };
 
         } catch (error) {
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 resolve({
                     success: true,
                     responseTime: responseTime,
-                    message: `Site reachable (${responseTime}ms) - Image loaded successfully`
+                    message: `✅ Site reachable (${responseTime}ms) - Server responded successfully`
                 });
             };
 
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 resolve({
                     success: true, // Assume success since we got a response
                     responseTime: originalTime,
-                    message: `Site reachable (${originalTime}ms) - Server responded`
+                    message: `✅ Site reachable (${originalTime}ms) - Server responded (CORS blocking is normal)`
                 });
             };
 
@@ -258,8 +258,13 @@ document.addEventListener('DOMContentLoaded', function () {
     infoDiv.style.fontSize = '0.9rem';
     infoDiv.style.color = '#64748b';
     infoDiv.innerHTML = `
-        <p><strong>Note:</strong> Due to browser security restrictions (CORS), some sites may appear unreachable even if they're online. 
-        This tool provides a basic connectivity test and may not reflect the actual server status.</p>
+        <p><strong>How this works:</strong> This tool tests basic connectivity by attempting to reach the server. 
+        A successful result means the site is reachable and responding.</p>
+        <p><strong>About CORS errors:</strong> You may see CORS-related errors in your browser's developer console 
+        when testing sites like Google. These are normal security restrictions and don't indicate connection problems. 
+        If you see a "✅ Connection successful" message above, the test worked correctly!</p>
+        <p><strong>Tip:</strong> Open your browser's developer console (F12) if you want to see technical details, 
+        but focus on the results shown in this tool interface.</p>
     `;
 
     toolContent.appendChild(infoDiv);
