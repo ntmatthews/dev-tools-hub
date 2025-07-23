@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyperforge Labs – Developer Tools Hub</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="description" content="A collection of essential developer tools by Hyperforge Labs">
+    <meta name="theme-color" content="#2563eb">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>🔧 Hyperforge Labs</h1>
+            <p class="subtitle">Developer Tools Hub</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- UUID Generator Tool -->
+        <section class="tool-card">
+            <h2>🆔 UUID Generator</h2>
+            <p>Generate unique identifiers for your applications</p>
+            <div class="tool-content">
+                <button id="generateUuid" class="btn btn-primary">Generate UUID</button>
+                <div class="result-container">
+                    <input type="text" id="uuidResult" readonly placeholder="Click generate to create a UUID">
+                    <button id="copyUuid" class="btn btn-secondary">Copy</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Base64 Encoder/Decoder Tool -->
+        <section class="tool-card">
+            <h2>🔐 Base64 Encoder/Decoder</h2>
+            <p>Encode and decode Base64 strings</p>
+            <div class="tool-content">
+                <div class="input-group">
+                    <textarea id="base64Input" placeholder="Enter text to encode/decode"></textarea>
+                </div>
+                <div class="button-group">
+                    <button id="encodeBase64" class="btn btn-primary">Encode</button>
+                    <button id="decodeBase64" class="btn btn-primary">Decode</button>
+                    <button id="clearBase64" class="btn btn-secondary">Clear</button>
+                </div>
+                <div class="result-container">
+                    <textarea id="base64Result" readonly placeholder="Result will appear here"></textarea>
+                    <button id="copyBase64" class="btn btn-secondary">Copy Result</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Password Strength Checker -->
+        <section class="tool-card">
+            <h2>🔒 Password Strength Checker</h2>
+            <p>Check the strength and security of your passwords</p>
+            <div class="tool-content">
+                <div class="input-group">
+                    <input type="password" id="passwordInput" placeholder="Enter password to check">
+                    <button id="togglePassword" class="btn btn-secondary">👁️</button>
+                </div>
+                <div class="password-strength">
+                    <div class="strength-bar" id="strengthBar"></div>
+                    <p class="strength-text" id="strengthText">Enter a password to check its strength</p>
+                </div>
+                <div class="password-requirements" id="passwordRequirements">
+                    <p>Password Requirements:</p>
+                    <ul>
+                        <li id="length">At least 8 characters</li>
+                        <li id="uppercase">Contains uppercase letter</li>
+                        <li id="lowercase">Contains lowercase letter</li>
+                        <li id="number">Contains number</li>
+                        <li id="special">Contains special character</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- JSON Formatter -->
+        <section class="tool-card">
+            <h2>📋 JSON Formatter</h2>
+            <p>Format, validate, and beautify JSON data</p>
+            <div class="tool-content">
+                <div class="input-group">
+                    <textarea id="jsonInput" placeholder="Paste your JSON here"></textarea>
+                </div>
+                <div class="button-group">
+                    <button id="formatJson" class="btn btn-primary">Format</button>
+                    <button id="minifyJson" class="btn btn-primary">Minify</button>
+                    <button id="validateJson" class="btn btn-secondary">Validate</button>
+                    <button id="clearJson" class="btn btn-secondary">Clear</button>
+                </div>
+                <div class="result-container">
+                    <textarea id="jsonResult" readonly placeholder="Formatted JSON will appear here"></textarea>
+                    <button id="copyJson" class="btn btn-secondary">Copy Result</button>
+                </div>
+                <div id="jsonError" class="error-message"></div>
+            </div>
+        </section>
+
+        <!-- Ping Test Frontend -->
+        <section class="tool-card">
+            <h2>🌐 Connection Test</h2>
+            <p>Test connectivity to websites and services</p>
+            <div class="tool-content">
+                <div class="input-group">
+                    <input type="url" id="pingUrl" placeholder="Enter URL (e.g., https://google.com)">
+                    <button id="testConnection" class="btn btn-primary">Test Connection</button>
+                </div>
+                <div class="ping-results" id="pingResults">
+                    <p>Click "Test Connection" to check if a website is reachable</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Hyperforge Labs. Built with ❤️ for developers.</p>
+            <p><a href="https://github.com/hyperforge-labs/dev-tools-hub" target="_blank">View on GitHub</a></p>
+        </div>
+    </footer>
+
+    <script src="js/uuid.js"></script>
+    <script src="js/base64.js"></script>
+    <script src="js/password-checker.js"></script>
+    <script src="js/json-formatter.js"></script>
+    <script src="js/ping-test.js"></script>
+</body>
+
+</html>

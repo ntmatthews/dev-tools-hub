@@ -1,0 +1,22 @@
+{
+    "name": "Hyperforge Labs - Developer Tools Hub",
+    "short_name": "Dev Tools Hub",
+    "description": "A collection of essential developer tools by Hyperforge Labs",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#f8fafc",
+    "theme_color": "#2563eb",
+    "icons": [
+        {
+            "src": "favicon.ico",
+            "sizes": "32x32",
+            "type": "image/x-icon"
+        }
+    ],
+    "categories": [
+        "developer",
+        "utilities",
+        "tools"
+    ],
+    "lang": "en"
+}
