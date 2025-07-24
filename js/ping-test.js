@@ -260,11 +260,11 @@ document.addEventListener('DOMContentLoaded', function () {
     infoDiv.innerHTML = `
         <p><strong>How this works:</strong> This tool tests basic connectivity by attempting to reach the server. 
         A successful result means the site is reachable and responding.</p>
-        <p><strong>About CORS errors:</strong> You may see CORS-related errors in your browser's developer console 
-        when testing sites like Google. These are normal security restrictions and don't indicate connection problems. 
-        If you see a "✅ Connection successful" message above, the test worked correctly!</p>
-        <p><strong>Tip:</strong> Open your browser's developer console (F12) if you want to see technical details, 
-        but focus on the results shown in this tool interface.</p>
+        <p><strong>About console warnings:</strong> When testing popular sites like Google, you may see warnings about 
+        CORS, deprecated APIs, or blocked resources in your browser's console. These come from the target website's 
+        code, not from this tool, and don't indicate connection problems.</p>
+        <p><strong>What to focus on:</strong> Look for the ✅ or ❌ results in this interface. Console messages 
+        are just technical details from the websites you're testing.</p>
     `;
 
     toolContent.appendChild(infoDiv);
