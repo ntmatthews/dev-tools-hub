@@ -382,39 +382,201 @@
     </main>
 
     <!-- Footer -->
-    <footer>
+    <footer class="tech-footer">
+        <div class="footer-background-pattern"></div>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Hyperforge Labs</h4>
-                    <p>Developer Tools Hub v2.0</p>
-                    <p>Built with ❤️ for developers</p>
+            <!-- System Status Bar -->
+            <div class="footer-status-bar">
+                <div class="status-section">
+                    <span class="status-indicator pulse-green"></span>
+                    <span class="status-text">SYSTEM STATUS: ONLINE</span>
                 </div>
-                <div class="footer-section">
-                    <h4>Features</h4>
-                    <ul>
-                        <li>API Integration</li>
-                        <li>Dark/Light Themes</li>
-                        <li>Offline Support</li>
-                        <li>Security Focused</li>
-                    </ul>
+                <div class="status-section">
+                    <span class="status-metric">UPTIME: <span id="uptime">99.9%</span></span>
                 </div>
-                <div class="footer-section">
-                    <h4>Links</h4>
-                    <ul>
-                        <li><a href="https://github.com/ntmatthews/dev-tools-hub" target="_blank">GitHub</a></li>
-                        <li><a href="#" onclick="userPrefs.showPreferencesModal()">Settings</a></li>
-                        <li><a href="#" onclick="showAbout()">About</a></li>
-                        <li><a href="#" onclick="showKeyboardShortcuts()">Shortcuts</a></li>
-                    </ul>
+                <div class="status-section">
+                    <span class="status-metric">API LATENCY: <span id="latency">~45ms</span></span>
+                </div>
+                <div class="status-section">
+                    <span class="status-metric">USERS: <span id="activeUsers">2.3k</span></span>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Hyperforge Labs. All rights reserved.</p>
-                <div class="footer-badges">
-                    <span class="badge">PWA Ready</span>
-                    <span class="badge">API Powered</span>
-                    <span class="badge">Open Source</span>
+
+            <!-- Main Footer Content -->
+            <div class="footer-matrix">
+                <!-- Left Column - Company Info -->
+                <div class="footer-terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-controls">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="terminal-title">hyperforge@labs:~$</span>
+                    </div>
+                    <div class="terminal-content">
+                        <div class="terminal-line">
+                            <span class="prompt">$</span>
+                            <span class="command">whoami</span>
+                        </div>
+                        <div class="terminal-output">Hyperforge Labs</div>
+                        <div class="terminal-line">
+                            <span class="prompt">$</span>
+                            <span class="command">cat version</span>
+                        </div>
+                        <div class="terminal-output">Developer Tools Hub v2.0.0</div>
+                        <div class="terminal-line">
+                            <span class="prompt">$</span>
+                            <span class="command">echo $MISSION</span>
+                        </div>
+                        <div class="terminal-output">Built with 💚 for developers</div>
+                        <div class="terminal-cursor">█</div>
+                    </div>
+                </div>
+
+                <!-- Center Column - Tech Stack -->
+                <div class="footer-section tech-stack">
+                    <h4 class="section-title">
+                        <span class="icon">⚡</span>
+                        <span class="text">TECH STACK</span>
+                    </h4>
+                    <div class="tech-grid">
+                        <div class="tech-item">
+                            <span class="tech-icon">🚀</span>
+                            <span class="tech-name">Vanilla JS</span>
+                            <span class="tech-version">ES2023</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">🎨</span>
+                            <span class="tech-name">CSS Grid</span>
+                            <span class="tech-version">Level 3</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">📱</span>
+                            <span class="tech-name">PWA</span>
+                            <span class="tech-version">v2.0</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">🔒</span>
+                            <span class="tech-name">Web Crypto</span>
+                            <span class="tech-version">API</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">⚙️</span>
+                            <span class="tech-name">Service Worker</span>
+                            <span class="tech-version">v1.0</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">🌐</span>
+                            <span class="tech-name">Web APIs</span>
+                            <span class="tech-version">Modern</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Quick Access -->
+                <div class="footer-section quick-access">
+                    <h4 class="section-title">
+                        <span class="icon">🔗</span>
+                        <span class="text">QUICK ACCESS</span>
+                    </h4>
+                    <div class="access-grid">
+                        <a href="https://github.com/ntmatthews/dev-tools-hub" target="_blank" class="access-link">
+                            <span class="access-icon">📦</span>
+                            <span class="access-text">Source Code</span>
+                            <span class="access-arrow">→</span>
+                        </a>
+                        <a href="#" onclick="userPrefs.showPreferencesModal()" class="access-link">
+                            <span class="access-icon">⚙️</span>
+                            <span class="access-text">Settings</span>
+                            <span class="access-arrow">→</span>
+                        </a>
+                        <a href="#" onclick="showAbout()" class="access-link">
+                            <span class="access-icon">ℹ️</span>
+                            <span class="access-text">About</span>
+                            <span class="access-arrow">→</span>
+                        </a>
+                        <a href="#" onclick="showKeyboardShortcuts()" class="access-link">
+                            <span class="access-icon">⌨️</span>
+                            <span class="access-text">Shortcuts</span>
+                            <span class="access-arrow">→</span>
+                        </a>
+                        <a href="#" onclick="window.devToolsHub.showNotification('API Documentation coming soon!', 'info')" class="access-link">
+                            <span class="access-icon">📚</span>
+                            <span class="access-text">API Docs</span>
+                            <span class="access-arrow">→</span>
+                        </a>
+                        <a href="#" onclick="window.open('https://status.hyperforgestudios.org', '_blank')" class="access-link">
+                            <span class="access-icon">📊</span>
+                            <span class="access-text">Status Page</span>
+                            <span class="access-arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom - Enhanced -->
+            <div class="footer-bottom-tech">
+                <div class="footer-left">
+                    <div class="copyright-section">
+                        <span class="copyright-symbol">©</span>
+                        <span class="copyright-year">2025</span>
+                        <span class="copyright-company">HYPERFORGE LABS</span>
+                        <span class="copyright-rights">ALL RIGHTS RESERVED</span>
+                    </div>
+                    <div class="build-info">
+                        <span class="build-label">BUILD:</span>
+                        <span class="build-hash" id="buildHash">a1b2c3d</span>
+                        <span class="build-separator">•</span>
+                        <span class="deploy-label">DEPLOYED:</span>
+                        <span class="deploy-time" id="deployTime">2024-07-24T18:30:00Z</span>
+                    </div>
+                </div>
+                
+                <div class="footer-center">
+                    <div class="performance-metrics">
+                        <div class="metric">
+                            <span class="metric-label">LIGHTHOUSE</span>
+                            <span class="metric-value">95+</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">SECURITY</span>
+                            <span class="metric-value">A+</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">PWA</span>
+                            <span class="metric-value">100%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-right">
+                    <div class="tech-badges">
+                        <span class="tech-badge primary">
+                            <span class="badge-icon">🚀</span>
+                            <span class="badge-text">PWA READY</span>
+                        </span>
+                        <span class="tech-badge secondary">
+                            <span class="badge-icon">⚡</span>
+                            <span class="badge-text">API POWERED</span>
+                        </span>
+                        <span class="tech-badge accent">
+                            <span class="badge-icon">🔓</span>
+                            <span class="badge-text">OPEN SOURCE</span>
+                        </span>
+                        <span class="tech-badge success">
+                            <span class="badge-icon">🔒</span>
+                            <span class="badge-text">SECURE</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Decoration -->
+            <div class="footer-decoration">
+                <div class="code-line">
+                    <span class="line-number">001</span>
+                    <span class="code-content">// End of Application - Thank you for using Hyperforge Labs Developer Tools</span>
                 </div>
             </div>
         </div>

@@ -30,7 +30,7 @@ const CACHE_FILES = [
 // Install event - cache resources
 self.addEventListener('install', (event) => {
     console.log('🔧 Service Worker: Installing...');
-    
+
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then((cache) => {
@@ -50,7 +50,7 @@ self.addEventListener('install', (event) => {
 // Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
     console.log('🔧 Service Worker: Activating...');
-    
+
     event.waitUntil(
         caches.keys()
             .then((cacheNames) => {
@@ -76,12 +76,12 @@ self.addEventListener('fetch', (event) => {
     if (event.request.method !== 'GET') {
         return;
     }
-    
+
     // Skip external URLs
     if (!event.request.url.startsWith(self.location.origin)) {
         return;
     }
-    
+
     event.respondWith(
         caches.match(event.request)
             .then((cachedResponse) => {
@@ -89,7 +89,7 @@ self.addEventListener('fetch', (event) => {
                 if (cachedResponse) {
                     return cachedResponse;
                 }
-                
+
                 // Fetch from network
                 return fetch(event.request)
                     .then((response) => {
@@ -97,15 +97,15 @@ self.addEventListener('fetch', (event) => {
                         if (!response || response.status !== 200 || response.type !== 'basic') {
                             return response;
                         }
-                        
+
                         // Clone the response before caching
                         const responseToCache = response.clone();
-                        
+
                         caches.open(CACHE_NAME)
                             .then((cache) => {
                                 cache.put(event.request, responseToCache);
                             });
-                        
+
                         return response;
                     })
                     .catch(() => {
@@ -113,7 +113,7 @@ self.addEventListener('fetch', (event) => {
                         if (event.request.mode === 'navigate') {
                             return caches.match('/index.html');
                         }
-                        
+
                         // Return a simple offline response for other requests
                         return new Response('Offline', {
                             status: 503,
@@ -138,7 +138,7 @@ self.addEventListener('sync', (event) => {
 // Push notification support
 self.addEventListener('push', (event) => {
     console.log('🔧 Service Worker: Push received');
-    
+
     const options = {
         body: event.data ? event.data.text() : 'New update available!',
         icon: '/favicon.svg',
@@ -161,7 +161,7 @@ self.addEventListener('push', (event) => {
             }
         ]
     };
-    
+
     event.waitUntil(
         self.registration.showNotification('Hyperforge Dev Tools', options)
     );
@@ -170,9 +170,9 @@ self.addEventListener('push', (event) => {
 // Notification click handler
 self.addEventListener('notificationclick', (event) => {
     console.log('🔧 Service Worker: Notification clicked');
-    
+
     event.notification.close();
-    
+
     if (event.action === 'explore') {
         // Open the app
         event.waitUntil(
@@ -186,7 +186,7 @@ async function doBackgroundSync() {
     try {
         // Sync any pending data
         const pending = await getStoredRequests();
-        
+
         for (const request of pending) {
             try {
                 await fetch(request.url, request.options);
@@ -195,7 +195,7 @@ async function doBackgroundSync() {
                 console.error('🔧 Service Worker: Failed to sync request', error);
             }
         }
-        
+
         console.log('🔧 Service Worker: Background sync completed');
     } catch (error) {
         console.error('🔧 Service Worker: Background sync failed', error);
@@ -216,11 +216,11 @@ async function removeStoredRequest(id) {
 // Message handler for communication with main thread
 self.addEventListener('message', (event) => {
     console.log('🔧 Service Worker: Message received', event.data);
-    
+
     if (event.data && event.data.type === 'SKIP_WAITING') {
         self.skipWaiting();
     }
-    
+
     if (event.data && event.data.type === 'GET_VERSION') {
         event.ports[0].postMessage({
             version: CACHE_VERSION,
@@ -240,12 +240,12 @@ async function cleanupOldData() {
     try {
         // Clean up old cached data
         const cacheNames = await caches.keys();
-        const oldCaches = cacheNames.filter(name => 
+        const oldCaches = cacheNames.filter(name =>
             name.startsWith('hyperforge-dev-tools-') && name !== CACHE_NAME
         );
-        
+
         await Promise.all(oldCaches.map(name => caches.delete(name)));
-        
+
         console.log('🔧 Service Worker: Cleanup completed');
     } catch (error) {
         console.error('🔧 Service Worker: Cleanup failed', error);

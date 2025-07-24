@@ -10,7 +10,12 @@
     "orientation": "portrait-primary",
     "scope": "/",
     "lang": "en",
-    "categories": ["developer", "tools", "utilities", "productivity"],
+    "categories": [
+        "developer",
+        "tools",
+        "utilities",
+        "productivity"
+    ],
     "prefer_related_applications": false,
     "icons": [
         {
