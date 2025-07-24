@@ -1,23 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hyperforge Labs – Developer Tools Hub</title>
+    <title>Hyperforge Labs – Developer Tools Hub v2.0</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/themes.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="manifest" href="manifest.json">
-    <meta name="description" content="A collection of essential developer tools by Hyperforge Labs">
+    <meta name="description"
+        content="Professional developer tools suite with API integration, security features, and advanced utilities by Hyperforge Labs">
     <meta name="theme-color" content="#2563eb">
+    <meta name="keywords"
+        content="developer tools, API, security, UUID, base64, password, JSON, QR code, hash calculator">
+    <meta name="author" content="Hyperforge Labs">
+    <meta name="version" content="2.0">
 
     <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy"
+        content="upgrade-insecure-requests; default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; connect-src 'self' https://api.hyperforgestudios.org https://httpbin.org; font-src 'self' https://fonts.gstatic.com;">
     <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 
-    <!-- Force HTTPS redirect if accessed via HTTP -->
+    <!-- Performance Optimization -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://api.hyperforgestudios.org">
+
+    <!-- Progressive Web App -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Dev Tools Hub">
+    <link rel="apple-touch-icon" href="favicon.svg">
+
+    <!-- Force HTTPS redirect -->
     <script>
-        // Immediate HTTPS redirect - runs before page renders
         (function () {
             if (location.protocol !== 'https:' &&
                 location.hostname !== 'localhost' &&
@@ -32,123 +52,385 @@
 </head>
 
 <body>
-    <header>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">🔧</div>
+            <h2>Hyperforge Labs</h2>
+            <p>Loading Developer Tools Hub v2.0...</p>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="main-header">
         <div class="container">
-            <h1>🔧 Hyperforge Labs</h1>
-            <p class="subtitle">Developer Tools Hub</p>
+            <div class="header-content">
+                <div class="logo-section">
+                    <h1>🔧 Hyperforge Labs</h1>
+                    <p class="subtitle">Developer Tools Hub <span class="version-badge">v2.0</span></p>
+                </div>
+                <div class="header-actions">
+                    <div class="api-status" id="apiStatus">
+                        <span class="status-indicator"></span>
+                        <span class="status-text">API Ready</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
+    <!-- Quick Search -->
+    <section class="quick-search">
+        <div class="container">
+            <div class="search-box">
+                <input type="text" id="toolSearch" placeholder="🔍 Search tools..." aria-label="Search tools">
+                <div class="search-suggestions" id="searchSuggestions"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
     <main class="container">
-        <!-- UUID Generator Tool -->
-        <section class="tool-card">
-            <h2>🆔 UUID Generator</h2>
-            <p>Generate unique identifiers for your applications</p>
-            <div class="tool-content">
-                <button id="generateUuid" class="btn btn-primary">Generate UUID</button>
-                <div class="result-container">
-                    <input type="text" id="uuidResult" readonly placeholder="Click generate to create a UUID">
-                    <button id="copyUuid" class="btn btn-secondary">Copy</button>
-                </div>
-            </div>
-        </section>
+        <!-- Tool Categories -->
+        <div class="tool-categories">
+            <button class="category-tab active" data-category="all">All Tools</button>
+            <button class="category-tab" data-category="encoding">Encoding</button>
+            <button class="category-tab" data-category="security">Security</button>
+            <button class="category-tab" data-category="generators">Generators</button>
+            <button class="category-tab" data-category="network">Network</button>
+            <button class="category-tab" data-category="favorites">⭐ Favorites</button>
+        </div>
 
-        <!-- Base64 Encoder/Decoder Tool -->
-        <section class="tool-card">
-            <h2>🔐 Base64 Encoder/Decoder</h2>
-            <p>Encode and decode Base64 strings</p>
-            <div class="tool-content">
-                <div class="input-group">
-                    <textarea id="base64Input" placeholder="Enter text to encode/decode"></textarea>
+        <!-- Tools Grid -->
+        <div class="tools-grid">
+            <!-- UUID Generator Tool -->
+            <section class="tool-card" data-category="generators" data-tool-id="uuid-generator">
+                <div class="tool-header">
+                    <h2>🆔 UUID Generator</h2>
+                    <div class="tool-actions">
+                        <button class="tool-favorite" title="Add to favorites">⭐</button>
+                        <button class="tool-expand" title="Expand tool">⛶</button>
+                    </div>
                 </div>
-                <div class="button-group">
-                    <button id="encodeBase64" class="btn btn-primary">Encode</button>
-                    <button id="decodeBase64" class="btn btn-primary">Decode</button>
-                    <button id="clearBase64" class="btn btn-secondary">Clear</button>
+                <p>Generate unique identifiers for your applications</p>
+                <div class="tool-content">
+                    <div class="uuid-options">
+                        <select id="uuidVersion">
+                            <option value="4">UUID v4 (Random)</option>
+                            <option value="1">UUID v1 (Timestamp)</option>
+                            <option value="nil">Nil UUID</option>
+                        </select>
+                        <input type="number" id="uuidCount" min="1" max="100" value="1" placeholder="Count">
+                    </div>
+                    <button id="generateUuid" class="btn btn-primary">Generate UUID</button>
+                    <div class="result-container">
+                        <textarea id="uuidResult" readonly placeholder="Click generate to create UUIDs"></textarea>
+                        <button id="copyUuid" class="btn btn-secondary">Copy</button>
+                    </div>
                 </div>
-                <div class="result-container">
-                    <textarea id="base64Result" readonly placeholder="Result will appear here"></textarea>
-                    <button id="copyBase64" class="btn btn-secondary">Copy Result</button>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Password Strength Checker -->
-        <section class="tool-card">
-            <h2>🔒 Password Strength Checker</h2>
-            <p>Check the strength and security of your passwords</p>
-            <div class="tool-content">
-                <div class="input-group">
-                    <input type="password" id="passwordInput" placeholder="Enter password to check">
-                    <button id="togglePassword" class="btn btn-secondary">👁️</button>
+            <!-- Base64 Encoder/Decoder Tool -->
+            <section class="tool-card" data-category="encoding" data-tool-id="base64-codec">
+                <div class="tool-header">
+                    <h2>🔐 Base64 Encoder/Decoder</h2>
+                    <div class="tool-actions">
+                        <button class="tool-favorite" title="Add to favorites">⭐</button>
+                        <button class="tool-expand" title="Expand tool">⛶</button>
+                    </div>
                 </div>
-                <div class="password-strength">
-                    <div class="strength-bar" id="strengthBar"></div>
-                    <p class="strength-text" id="strengthText">Enter a password to check its strength</p>
+                <p>Encode and decode Base64 strings with advanced options</p>
+                <div class="tool-content">
+                    <div class="base64-options">
+                        <label>
+                            <input type="checkbox" id="base64UrlSafe"> URL Safe
+                        </label>
+                        <label>
+                            <input type="checkbox" id="base64NoPadding"> No Padding
+                        </label>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="base64Input" placeholder="Enter text to encode/decode"></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button id="encodeBase64" class="btn btn-primary">Encode</button>
+                        <button id="decodeBase64" class="btn btn-primary">Decode</button>
+                        <button id="clearBase64" class="btn btn-secondary">Clear</button>
+                    </div>
+                    <div class="result-container">
+                        <textarea id="base64Result" readonly placeholder="Result will appear here"></textarea>
+                        <button id="copyBase64" class="btn btn-secondary">Copy Result</button>
+                    </div>
                 </div>
-                <div class="password-requirements" id="passwordRequirements">
-                    <p>Password Requirements:</p>
+            </section>
+
+            <!-- Password Strength Checker -->
+            <section class="tool-card" data-category="security" data-tool-id="password-checker">
+                <div class="tool-header">
+                    <h2>🔒 Password Security Suite</h2>
+                    <div class="tool-actions">
+                        <button class="tool-favorite" title="Add to favorites">⭐</button>
+                        <button class="tool-expand" title="Expand tool">⛶</button>
+                    </div>
+                </div>
+                <p>Advanced password analysis with breach checking</p>
+                <div class="tool-content">
+                    <div class="input-group">
+                        <input type="password" id="passwordInput" placeholder="Enter password to analyze">
+                        <button id="togglePassword" class="btn btn-secondary">👁️</button>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar" id="strengthBar"></div>
+                        <p class="strength-text" id="strengthText">Enter a password to check its strength</p>
+                    </div>
+                    <div class="password-features">
+                        <button id="generateSecurePassword" class="btn btn-primary">Generate Secure Password</button>
+                        <button id="checkBreach" class="btn btn-warning">Check for Breaches</button>
+                    </div>
+                    <div class="password-requirements" id="passwordRequirements">
+                        <p>Security Requirements:</p>
+                        <ul>
+                            <li id="length">At least 12 characters</li>
+                            <li id="uppercase">Contains uppercase letter</li>
+                            <li id="lowercase">Contains lowercase letter</li>
+                            <li id="number">Contains number</li>
+                            <li id="special">Contains special character</li>
+                            <li id="noCommon">Not a common password</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- JSON Formatter -->
+            <section class="tool-card" data-category="encoding" data-tool-id="json-formatter">
+                <div class="tool-header">
+                    <h2>📋 JSON Processor</h2>
+                    <div class="tool-actions">
+                        <button class="tool-favorite" title="Add to favorites">⭐</button>
+                        <button class="tool-expand" title="Expand tool">⛶</button>
+                    </div>
+                </div>
+                <p>Format, validate, and transform JSON with advanced features</p>
+                <div class="tool-content">
+                    <div class="json-options">
+                        <select id="jsonIndent">
+                            <option value="2">2 spaces</option>
+                            <option value="4">4 spaces</option>
+                            <option value="tab">Tabs</option>
+                        </select>
+                        <label>
+                            <input type="checkbox" id="jsonSortKeys"> Sort Keys
+                        </label>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="jsonInput" placeholder="Paste your JSON here"></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button id="formatJson" class="btn btn-primary">Format</button>
+                        <button id="minifyJson" class="btn btn-primary">Minify</button>
+                        <button id="validateJson" class="btn btn-secondary">Validate</button>
+                        <button id="clearJson" class="btn btn-secondary">Clear</button>
+                    </div>
+                    <div class="result-container">
+                        <textarea id="jsonResult" readonly placeholder="Formatted JSON will appear here"></textarea>
+                        <button id="copyJson" class="btn btn-secondary">Copy Result</button>
+                    </div>
+                    <div id="jsonError" class="error-message"></div>
+                    <div id="jsonStats" class="json-stats"></div>
+                </div>
+            </section>
+
+            <!-- Hash Calculator -->
+            <section class="tool-card" data-category="security" data-tool-id="hash-calculator">
+                <div class="tool-header">
+                    <h2>🔐 Hash Calculator</h2>
+                    <div class="tool-actions">
+                        <button class="tool-favorite" title="Add to favorites">⭐</button>
+                        <button class="tool-expand" title="Expand tool">⛶</button>
+                    </div>
+                </div>
+                <p>Calculate cryptographic hashes for text and files</p>
+                <div class="tool-content">
+                    <div class="hash-options">
+                        <select id="hashAlgorithm">
+                            <option value="sha256">SHA-256</option>
+                        </select>
+                    </div>
+                    <div class="hash-inputs">
+                        <div class="input-group">
+                            <textarea id="hashInput" placeholder="Enter text to hash"></textarea>
+                        </div>
+                        <div class="file-input-group">
+                            <input type="file" id="hashFileInput" accept="*/*">
+                            <label for="hashFileInput">Or select a file</label>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button id="calculateHash" class="btn btn-primary">Calculate Hash</button>
+                        <button id="clearHash" class="btn btn-secondary">Clear</button>
+                        <button id="compareHash" class="btn btn-secondary">Compare</button>
+                    </div>
+                    <div id="hashResults" class="hash-results">
+                        <p>Hash results will appear here</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- QR Code Generator -->
+            <section class="tool-card" data-category="generators" data-tool-id="qr-generator">
+                <div class="tool-header">
+                    <h2>📱 QR Code Generator</h2>
+                    <div class="tool-actions">
+                        <button class="tool-favorite" title="Add to favorites">⭐</button>
+                        <button class="tool-expand" title="Expand tool">⛶</button>
+                    </div>
+                </div>
+                <p>Generate customizable QR codes for various data types</p>
+                <div class="tool-content">
+                    <div class="qr-options">
+                        <select id="qrType">
+                            <option value="text">Plain Text</option>
+                        </select>
+                        <select id="qrSize">
+                            <option value="200">200x200</option>
+                            <option value="300">300x300</option>
+                            <option value="400">400x400</option>
+                            <option value="500">500x500</option>
+                        </select>
+                        <select id="qrErrorCorrection">
+                            <option value="L">Low (7%)</option>
+                            <option value="M" selected>Medium (15%)</option>
+                            <option value="Q">Quartile (25%)</option>
+                            <option value="H">High (30%)</option>
+                        </select>
+                    </div>
+                    <div class="qr-colors">
+                        <label>
+                            Foreground: <input type="color" id="qrColorFg" value="#000000">
+                        </label>
+                        <label>
+                            Background: <input type="color" id="qrColorBg" value="#ffffff">
+                        </label>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="qrTextInput" placeholder="Enter content for QR code"></textarea>
+                    </div>
+                    <div class="file-input-group">
+                        <input type="file" id="qrLogoInput" accept="image/*">
+                        <label for="qrLogoInput">Add logo (optional)</label>
+                    </div>
+                    <div class="button-group">
+                        <button id="generateQR" class="btn btn-primary">Generate QR Code</button>
+                        <button id="downloadQR" class="btn btn-secondary" disabled>Download</button>
+                        <button id="clearQR" class="btn btn-secondary">Clear</button>
+                    </div>
+                    <div class="qr-preview" id="qrPreview">
+                        <p>QR code will appear here</p>
+                    </div>
+                    <div id="qrInfo" class="qr-info"></div>
+                </div>
+            </section>
+
+            <!-- Connection Test -->
+            <section class="tool-card" data-category="network" data-tool-id="connection-test">
+                <div class="tool-header">
+                    <h2>🌐 Network Tools</h2>
+                    <div class="tool-actions">
+                        <button class="tool-favorite" title="Add to favorites">⭐</button>
+                        <button class="tool-expand" title="Expand tool">⛶</button>
+                    </div>
+                </div>
+                <p>Network connectivity testing and IP information</p>
+                <div class="tool-content">
+                    <div class="network-tabs">
+                        <button class="network-tab active" data-tab="ping">Connection Test</button>
+                        <button class="network-tab" data-tab="ip">IP Info</button>
+                        <button class="network-tab" data-tab="headers">Headers</button>
+                    </div>
+
+                    <div class="network-content">
+                        <div class="tab-content active" id="ping-tab">
+                            <div class="input-group">
+                                <input type="url" id="pingUrl" placeholder="Enter URL (e.g., https://google.com)">
+                                <button id="testConnection" class="btn btn-primary">Test Connection</button>
+                            </div>
+                            <div class="ping-results" id="pingResults">
+                                <p>Click "Test Connection" to check if a website is reachable</p>
+                            </div>
+                        </div>
+
+                        <div class="tab-content" id="ip-tab">
+                            <button id="getIPInfo" class="btn btn-primary">Get My IP Info</button>
+                            <div id="ipResults" class="ip-results">
+                                <p>Click to get your IP information</p>
+                            </div>
+                        </div>
+
+                        <div class="tab-content" id="headers-tab">
+                            <button id="getHeaders" class="btn btn-primary">Get Request Headers</button>
+                            <div id="headersResults" class="headers-results">
+                                <p>Click to see your request headers</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Hyperforge Labs</h4>
+                    <p>Developer Tools Hub v2.0</p>
+                    <p>Built with ❤️ for developers</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Features</h4>
                     <ul>
-                        <li id="length">At least 8 characters</li>
-                        <li id="uppercase">Contains uppercase letter</li>
-                        <li id="lowercase">Contains lowercase letter</li>
-                        <li id="number">Contains number</li>
-                        <li id="special">Contains special character</li>
+                        <li>API Integration</li>
+                        <li>Dark/Light Themes</li>
+                        <li>Offline Support</li>
+                        <li>Security Focused</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="https://github.com/ntmatthews/dev-tools-hub" target="_blank">GitHub</a></li>
+                        <li><a href="#" onclick="userPrefs.showPreferencesModal()">Settings</a></li>
+                        <li><a href="#" onclick="showAbout()">About</a></li>
+                        <li><a href="#" onclick="showKeyboardShortcuts()">Shortcuts</a></li>
                     </ul>
                 </div>
             </div>
-        </section>
-
-        <!-- JSON Formatter -->
-        <section class="tool-card">
-            <h2>📋 JSON Formatter</h2>
-            <p>Format, validate, and beautify JSON data</p>
-            <div class="tool-content">
-                <div class="input-group">
-                    <textarea id="jsonInput" placeholder="Paste your JSON here"></textarea>
-                </div>
-                <div class="button-group">
-                    <button id="formatJson" class="btn btn-primary">Format</button>
-                    <button id="minifyJson" class="btn btn-primary">Minify</button>
-                    <button id="validateJson" class="btn btn-secondary">Validate</button>
-                    <button id="clearJson" class="btn btn-secondary">Clear</button>
-                </div>
-                <div class="result-container">
-                    <textarea id="jsonResult" readonly placeholder="Formatted JSON will appear here"></textarea>
-                    <button id="copyJson" class="btn btn-secondary">Copy Result</button>
-                </div>
-                <div id="jsonError" class="error-message"></div>
-            </div>
-        </section>
-
-        <!-- Ping Test Frontend -->
-        <section class="tool-card">
-            <h2>🌐 Connection Test</h2>
-            <p>Test connectivity to websites and services</p>
-            <div class="tool-content">
-                <div class="input-group">
-                    <input type="url" id="pingUrl" placeholder="Enter URL (e.g., https://google.com)">
-                    <button id="testConnection" class="btn btn-primary">Test Connection</button>
-                </div>
-                <div class="ping-results" id="pingResults">
-                    <p>Click "Test Connection" to check if a website is reachable</p>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hyperforge Labs. All rights reserved.</p>
+                <div class="footer-badges">
+                    <span class="badge">PWA Ready</span>
+                    <span class="badge">API Powered</span>
+                    <span class="badge">Open Source</span>
                 </div>
             </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Hyperforge Labs. Built with ❤️ for developers.</p>
-            <p><a href="https://github.com/hyperforge-labs/dev-tools-hub" target="_blank">View on GitHub</a></p>
         </div>
     </footer>
 
+    <!-- Scripts -->
+    <script src="js/api-service.js"></script>
+    <script src="js/theme-manager.js"></script>
     <script src="js/uuid.js"></script>
     <script src="js/base64.js"></script>
     <script src="js/password-checker.js"></script>
     <script src="js/json-formatter.js"></script>
+    <script src="js/hash-calculator.js"></script>
+    <script src="js/qr-generator.js"></script>
     <script src="js/ping-test.js"></script>
+    <script src="js/app.js"></script>
 </body>
 
 </html>
