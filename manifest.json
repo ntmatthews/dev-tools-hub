@@ -1,22 +1,73 @@
 {
-    "name": "Hyperforge Labs - Developer Tools Hub",
+    "name": "Hyperforge Labs – Developer Tools Hub v2.0",
     "short_name": "Dev Tools Hub",
-    "description": "A collection of essential developer tools by Hyperforge Labs",
+    "description": "Professional developer tools suite with API integration, security features, and advanced utilities",
+    "version": "2.0.0",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#f8fafc",
+    "background_color": "#2563eb",
     "theme_color": "#2563eb",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "en",
+    "categories": ["developer", "tools", "utilities", "productivity"],
+    "prefer_related_applications": false,
     "icons": [
+        {
+            "src": "favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        },
         {
             "src": "favicon.ico",
             "sizes": "32x32",
             "type": "image/x-icon"
         }
     ],
-    "categories": [
-        "developer",
-        "utilities",
-        "tools"
+    "shortcuts": [
+        {
+            "name": "UUID Generator",
+            "short_name": "UUID",
+            "description": "Generate unique identifiers",
+            "url": "/?tool=uuid"
+        },
+        {
+            "name": "Base64 Encoder",
+            "short_name": "Base64",
+            "description": "Encode and decode Base64 strings",
+            "url": "/?tool=base64"
+        },
+        {
+            "name": "Password Checker",
+            "short_name": "Password",
+            "description": "Check password strength and security",
+            "url": "/?tool=password"
+        },
+        {
+            "name": "JSON Formatter",
+            "short_name": "JSON",
+            "description": "Format and validate JSON data",
+            "url": "/?tool=json"
+        }
     ],
-    "lang": "en"
+    "related_applications": [
+        {
+            "platform": "web",
+            "url": "https://tools.hyperforgestudios.org"
+        }
+    ],
+    "share_target": {
+        "action": "/",
+        "method": "GET",
+        "params": {
+            "title": "title",
+            "text": "text",
+            "url": "url"
+        }
+    },
+    "launch_handler": {
+        "client_mode": "navigate-existing"
+    },
+    "handle_links": "preferred"
 }
